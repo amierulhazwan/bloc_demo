@@ -1,4 +1,5 @@
 import 'package:dryrun_flutter_example/dear_feature/dear_feature_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -49,12 +50,14 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 builder: (context, state) {
                   return ElevatedButton(
                     child: Text(
-                      state is DearFeatureEnabledState ? 'deactivate ' : 'activate',
+                      state is DearFeatureEnabledState
+                          ? 'deactivate '
+                          : 'activate',
                     ),
                     onPressed: () {
                       if (state is DearFeatureEnabledState) {
                         context.read<DearFeatureCubit>().deactivateFeature();
-                      } else if(state is DearFeatureDisabledState) {
+                      } else if (state is DearFeatureDisabledState) {
                         context.read<DearFeatureCubit>().activateFeature();
                       }
                     },
@@ -67,9 +70,9 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             BlocConsumer<DearFeatureCubit, DearFeatureState>(
               bloc: BlocProvider.of<DearFeatureCubit>(context),
               listener: (context, state) {
-                if(state is DearFeatureEnabledState){
+                if (state is DearFeatureEnabledState) {
                   _buttonStateText = 'On';
-                }else if(state is DearFeatureDisabledState){
+                } else if (state is DearFeatureDisabledState) {
                   _buttonStateText = 'Off';
                 }
               },
